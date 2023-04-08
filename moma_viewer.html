@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Map and Panorama View</title>
+    <link rel="stylesheet" href="https://openlayers.org/en/v6.5.0/css/ol.css" type="text/css">
+    <style>
+      #map {
+        width: 40%;
+        height: 100vh;
+        float: left;
+      }
+      #panorama {
+        width: 60%;
+        height: 100vh;
+        float: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="panorama"></div>
+    
+    <script src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script src="https://openlayers.org/en/v6.5.0/build/ol.js"></script>
+    <script>
+      // Create map
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-73.9978, 40.7225]),
+          zoom: 15
+        })
+      });
+
+      // Create panorama viewer
+      pannellum.viewer('panorama', {
+        "type": "equirectangular",
+        "panorama": "http://localhost/230222_121554257.jpg",
+        "autoLoad": true
+        //"panorama": "https://i.postimg.cc/xTkhnGdR/230222-121554257.jpg",
+      
+      });
+    </script>
+  </body>
+</html>
